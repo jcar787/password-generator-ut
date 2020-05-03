@@ -8,6 +8,7 @@ type PasswordGeneratorViewProps = {
   toggleNumeric: (event: React.ChangeEvent<HTMLInputElement>) => void;
   toggleUppercase: (event: React.ChangeEvent<HTMLInputElement>) => void;
   toggleSpecialCharacter: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangePasswordLength: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
@@ -17,6 +18,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
     toggleNumeric,
     toggleSpecialCharacter,
     toggleUppercase,
+    onChangePasswordLength,
     state,
   } = props;
   const {
@@ -73,7 +75,12 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
         </div>
         <div className="col-4">
           <label>Password Length:</label>
-          <input type="number" id="length" value={length} />
+          <input
+            type="number"
+            id="length"
+            onChange={onChangePasswordLength}
+            value={length}
+          />
         </div>
       </div>
       <div className="row">

@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer } from 'react';
+import React, { useReducer } from 'react';
 import PasswordGeneratorView from './PasswordGenerator.view';
 
 export interface State {
@@ -13,6 +13,11 @@ export interface State {
 interface ActionPassword {
   type: 'password';
   password: string;
+}
+
+interface ActionLength {
+  type: 'length';
+  length: number;
 }
 
 interface ActionToggleLowercase {
@@ -33,7 +38,8 @@ type Action =
   | ActionToggleLowercase
   | ActionToggleNumeric
   | ActionToggleSpecialCharacter
-  | ActionToggleUpperCase;
+  | ActionToggleUpperCase
+  | ActionLength;
 
 const initialState: State = {
   length: 8,
@@ -54,6 +60,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, uppercase: !state.uppercase };
     case 'toggleNumeric':
       return { ...state, numeric: !state.numeric };
+    case 'length':
+      return { ...state, length: action.length };
     case 'password':
       return { ...state, password: action.password };
     default:
@@ -62,10 +70,7 @@ function reducer(state: State, action: Action): State {
 }
 
 const PasswordGeneratorContainer = () => {
-  const [state, dispatch] = useReducer<Reducer<State, Action>>(
-    reducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer(reducer, initialState);
   const onClick = () => {
     console.log('Button Clicked');
   };
@@ -89,6 +94,18 @@ const PasswordGeneratorContainer = () => {
       type: 'toggleSpecialCharacter',
     });
   };
+
+  const onChangePasswordLength = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const rawNumber = e.target.value;
+    const length = rawNumber === '' ? 8 : Number.parseInt(e.target.value);
+    if (length >= 8 && length <= 128) {
+      dispatch({
+        type: 'length',
+        length,
+      });
+    }
+  };
   return (
     <PasswordGeneratorView
       onClick={onClick}
@@ -97,6 +114,7 @@ const PasswordGeneratorContainer = () => {
       toggleUppercase={toggleUppercase}
       toggleNumeric={toggleNumeric}
       toggleSpecialCharacter={toggleSpecialCharacter}
+      onChangePasswordLength={onChangePasswordLength}
     />
   );
 };
