@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import PasswordGeneratorView from './PasswordGenerator.view';
+import { generatePassword } from '../utils';
 
 export interface State {
   length: number;
@@ -72,7 +73,11 @@ function reducer(state: State, action: Action): State {
 const PasswordGeneratorContainer = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const onClick = () => {
-    console.log('Button Clicked');
+    const generatedPassword = generatePassword(state);
+    dispatch({
+      type: 'password',
+      password: generatedPassword,
+    });
   };
   const toggleLowercase = () => {
     dispatch({

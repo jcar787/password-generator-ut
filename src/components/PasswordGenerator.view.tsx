@@ -37,7 +37,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
         </div>
       </div>
       <div className="row">
-        <div className="col-2">
+        <div className="col-2 text-center">
           <input
             type="checkbox"
             id="specialCharacter"
@@ -46,7 +46,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
           />
           <label>Special Characters</label>
         </div>
-        <div className="col-2">
+        <div className="col-2 text-center">
           <input
             type="checkbox"
             id="lowercase"
@@ -55,7 +55,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
           />
           <label>Lowercase</label>
         </div>
-        <div className="col-2">
+        <div className="col-2 text-center">
           <input
             type="checkbox"
             id="uppercase"
@@ -64,7 +64,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
           />
           <label>Uppercase</label>
         </div>
-        <div className="col-2">
+        <div className="col-2 text-center">
           <input
             type="checkbox"
             id="numeric"
@@ -73,7 +73,7 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
           />
           <label>Numeric</label>
         </div>
-        <div className="col-4">
+        <div className="col-4 text-center">
           <label>Password Length:</label>
           <input
             type="number"
@@ -91,9 +91,11 @@ const PasswordGeneratorView = (props: PasswordGeneratorViewProps) => {
             </button>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12">
-            <div className="text-center">{password}</div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <div className="text-center">
+            <h3>{password}</h3>
           </div>
         </div>
       </div>
